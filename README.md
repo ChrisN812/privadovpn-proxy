@@ -1,22 +1,15 @@
 <p align="center">
-    <a href="https://nordvpn.com/"><img src="https://www.freelogovectors.net/wp-content/uploads/2020/11/nordvpn-logo.png" width="400"/></a>
+    <a href="https://privadovpn.com/"><img src="https://privadovpn.com/img/logo.svg" width="400"/></a>
     </br>
-    </br>
-    <a href="https://github.com/Joentje/nordvpn-proxy"><img src="https://github.com/Joentje/nordvpn-proxy/workflows/latest/badge.svg"/></a>
-    <a href="https://github.com/Joentje/nordvpn-proxy"><img src="https://github.com/Joentje/nordvpn-proxy/workflows/release/badge.svg"/></a>
-    <a href="https://github.com/Joentje/nordvpn-proxy"><img src="https://badgen.net/github/stars/Joentje/nordvpn-proxy?icon=github&label=stars&color=black"/></a>
-    <a href="https://cloud.docker.com/u/jeroenslot/repository/docker/jeroenslot/nordvpn-proxy"><img src="https://badgen.net/docker/size/jeroenslot/nordvpn-proxy?icon=docker&label=size"/></a>
-    <a href="https://cloud.docker.com/u/jeroenslot/repository/docker/jeroenslot/nordvpn-proxy"><img src="https://badgen.net/docker/pulls/jeroenslot/nordvpn-proxy?icon=docker&label=pulls"/></a>
-    <a href="https://cloud.docker.com/u/jeroenslot/repository/docker/jeroenslot/nordvpn-proxy"><img src="https://badgen.net/docker/stars/jeroenslot/nordvpn-proxy?icon=docker&label=stars"/></a>
     </br>
 </p>
 
-Alpine with OpenVPN and Privoxy to use your NordVPN account.
+Alpine with OpenVPN and Privoxy to use your Privado VPN account.
 
 # Features
 
 - Connects to the recommended server for you! Provided by the API.
-- Reconnects if the load is to high on a NordVPN server (Depends on setup CRON).
+- Reconnects if the load is to high on a PrivadoVPN server (Depends on setup CRON).
 - Reconnects to random servers if specified
 - Healthcheck if the connection is not secure.
 - Privoxy to use it elsewhere, for private browsing!
@@ -26,7 +19,7 @@ Alpine with OpenVPN and Privoxy to use your NordVPN account.
 
 # Prerequisite 
 
-You will need a [NordVPN](https://nordvpn.com) account.
+You will need a [PrivadoVPN](https://privadovpn.com) account.
 
 ## Environment Variables
 
@@ -34,7 +27,7 @@ You will need a [NordVPN](https://nordvpn.com) account.
 - `PASSWORD` Password of your account
 - `LOCAL_NETWORK` - The CIDR mask of the local IP network(s) (e.g. `192.168.1.0/24` or `10.1.1.0/24` or multiple networks `192.168.1.0/24,10.1.1.0/24,172.16.2.0/24`). This is needed to response to your client.
 - `CRON` You can set this variable to change the default check of every 15 minutes. This will be used to check if the LOAD is still OK. This can be changed using the CRON syntax.
-- `LOAD` If the load is > 75 on a NordVPN server, OpenVPN will be restarted and connects to the recommended server for you! This check will be done every 15 minutes by CRON.
+- `LOAD` If the load is > 75 on a server, OpenVPN will be restarted and connects to the recommended server for you! This check will be done every 15 minutes by CRON.
 - `RANDOM_TOP` *Optional*, if set, it will randomly select from the top "x" number of recommended servers. Valid values are integers between 1 and the number of servers that nord has.
 - `COUNTRY` *Optional*, you can choose your own country by using the two-letter country codes that are supported by NordVPN.
 - `PROTOCOL` *Optional*, default set to `tcp`, you can change it to `udp`.
@@ -50,13 +43,13 @@ docker run -d \
 --dns=103.86.96.100 \
 --dns=103.86.99.100 \
 --restart=always \
--e "USERNAME=<nordvpn_username>" \
--e "PASSWORD=<nordvpn_password>" \
+-e "USERNAME=<username>" \
+-e "PASSWORD=<password>" \
 -e "LOCAL_NETWORK=192.168.1.0/24" \
 -v /etc/localtime:/etc/localtime:ro \
 -v ovpn-data:/app/ovpn/config \
 -p 8118:8118 \
-jeroenslot/nordvpn-proxy:latest 
+chrisn812/privadovpn-proxy:latest 
 ```
 
 Now you can connect other containers to use this connection:
